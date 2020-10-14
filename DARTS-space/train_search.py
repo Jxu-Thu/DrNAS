@@ -38,6 +38,7 @@ parser.add_argument('--save', type=str, default='exp', help='experiment name')
 parser.add_argument('--seed', type=int, default=2, help='random seed')
 parser.add_argument('--grad_clip', type=float, default=5, help='gradient clipping')
 parser.add_argument('--train_portion', type=float, default=0.5, help='portion of training data')
+parser.add_argument('--warm_start_epoch', type=int, default=10, help='for debug 0')
 parser.add_argument('--unrolled', action='store_true', default=False, help='use one-step unrolled validation loss')
 parser.add_argument('--arch_learning_rate', type=float, default=6e-4, help='learning rate for arch encoding')
 parser.add_argument('--arch_weight_decay', type=float, default=1e-3, help='weight decay for arch encoding')
@@ -181,7 +182,9 @@ def train(train_queue, valid_queue, model, architect, criterion, optimizer, lr, 
     input_search = input_search.cuda()
     target_search = target_search.cuda(non_blocking=True)
 
-    if epoch >= 10:
+    if epoch >= args.warm_start_epoch:
+      import pdb
+      pdb.set_trace()
       architect.step(input, target, input_search, target_search, lr, optimizer, unrolled=args.unrolled)
     optimizer.zero_grad()
     architect.optimizer.zero_grad()

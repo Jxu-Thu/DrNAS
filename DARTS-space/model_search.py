@@ -163,8 +163,6 @@ class Network(nn.Module):
   
   def forward(self, input):
     s0 = s1 = self.stem(input)
-    import pdb
-    pdb.set_trace()
     weights_normal = process_step_matrix(self.alphas_normal, 'dirichlet', self.mask_normal)
     weights_reduce = process_step_matrix(self.alphas_reduce, 'dirichlet', self.mask_reduce)
     if not self.mask_normal is None:
