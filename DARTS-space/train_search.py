@@ -44,8 +44,8 @@ parser.add_argument('--arch_weight_decay', type=float, default=1e-3, help='weigh
 parser.add_argument('--k', type=int, default=6, help='init partial channel parameter')
 args = parser.parse_args()
 
-args.save = '../experiments/{}/search-progressive-{}-{}-{}'.format(
-    args.dataset, args.save, time.strftime("%Y%m%d-%H%M%S"), args.seed)
+args.save = '/blob/v-jinx/checkpoints_drnas/{}/search-progressive-{}-{}'.format(
+    args.dataset, args.save, args.seed)
 args.save += '-init_channels-' + str(args.init_channels)
 args.save += '-layers-' + str(args.layers) 
 args.save += '-init_pc-' + str(args.k)
@@ -111,7 +111,9 @@ def main():
     pin_memory=True)
 
   architect = Architect(model, args)
-
+  
+  import pdb
+  pdb.set_trace()
   # configure progressive parameter
   epoch = 0
   ks = [6, 4]
