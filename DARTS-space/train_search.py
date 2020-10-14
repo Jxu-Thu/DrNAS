@@ -116,6 +116,8 @@ def main():
   architect = Architect(model, args)
 
   # configure progressive parameter
+  import pdb
+  pdb.set_trace()
   epoch = 0
   ks = [6, 4]
   num_keeps = [7, 4]
