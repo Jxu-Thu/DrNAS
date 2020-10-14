@@ -225,6 +225,8 @@ class Network(nn.Module):
 
     # gene_normal = _parse(F.softmax(self.alphas_normal, dim=-1).data.cpu().numpy())
     # gene_reduce = _parse(F.softmax(self.alphas_reduce, dim=-1).data.cpu().numpy())
+    import pdb
+    pdb.set_trace()
     gene_normal = _parse(process_step_matrix(self.alphas_normal, 'softmax',
                                              self.mask_normal).data.cpu().numpy())
     gene_reduce = _parse(process_step_matrix(self.alphas_reduce, 'softmax',
