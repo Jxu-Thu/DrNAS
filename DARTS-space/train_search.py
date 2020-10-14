@@ -68,6 +68,7 @@ def main():
   if not torch.cuda.is_available():
     logging.info('no gpu device available')
     sys.exit(1)
+  
 
   np.random.seed(args.seed)
   torch.cuda.set_device(args.gpu)
@@ -77,7 +78,9 @@ def main():
   torch.cuda.manual_seed(args.seed)
   logging.info('gpu device = %d' % args.gpu)
   logging.info("args = %s", args)
-
+  
+  import pdb
+  pdb.set_trace()
   criterion = nn.CrossEntropyLoss()
   criterion = criterion.cuda()
   model = Network(args.init_channels, CIFAR_CLASSES, args.layers, criterion, k=args.k)
