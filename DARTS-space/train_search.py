@@ -80,8 +80,6 @@ def main():
   logging.info('gpu device = %d' % args.gpu)
   logging.info("args = %s", args)
   
-  import pdb
-  pdb.set_trace()
   criterion = nn.CrossEntropyLoss()
   criterion = criterion.cuda()
   model = Network(args.init_channels, CIFAR_CLASSES, args.layers, criterion, k=args.k)
@@ -117,8 +115,6 @@ def main():
   architect = Architect(model, args)
 
   # configure progressive parameter
-  import pdb
-  pdb.set_trace()
   epoch = 0
   ks = [6, 4]
   num_keeps = [7, 4]
@@ -148,6 +144,8 @@ def main():
       utils.save(model, os.path.join(args.save, 'weights.pt'))
     
     if not i == len(train_epochs) - 1:
+      import pdb
+      pdb.set_trace()
       model.pruning(num_keeps[i+1])
       # architect.pruning([model.mask_normal, model.mask_reduce])
       model.wider(ks[i+1])
@@ -183,8 +181,6 @@ def train(train_queue, valid_queue, model, architect, criterion, optimizer, lr, 
     target_search = target_search.cuda(non_blocking=True)
 
     if epoch >= args.warm_start_epoch:
-      import pdb
-      pdb.set_trace()
       architect.step(input, target, input_search, target_search, lr, optimizer, unrolled=args.unrolled)
     optimizer.zero_grad()
     architect.optimizer.zero_grad()
