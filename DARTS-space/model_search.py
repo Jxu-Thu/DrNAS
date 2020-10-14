@@ -166,6 +166,8 @@ class Network(nn.Module):
     weights_normal = process_step_matrix(self.alphas_normal, 'dirichlet', self.mask_normal)
     weights_reduce = process_step_matrix(self.alphas_reduce, 'dirichlet', self.mask_reduce)
     if not self.mask_normal is None:
+      import pdb
+      pdb.set_trace()
       assert (weights_normal[~self.mask_normal] == 0.0).all()
     if not self.mask_reduce is None:
       assert (weights_reduce[~self.mask_reduce] == 0.0).all()
