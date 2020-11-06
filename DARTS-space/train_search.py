@@ -144,8 +144,6 @@ def main():
       utils.save(model, os.path.join(args.save, 'weights.pt'))
     
     if not i == len(train_epochs) - 1:
-      import pdb
-      pdb.set_trace()
       model.pruning(num_keeps[i+1])
       # architect.pruning([model.mask_normal, model.mask_reduce])
       model.wider(ks[i+1])
